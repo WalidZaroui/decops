@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: react-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: react-frontend
+  template:
+    metadata:
+      labels:
+        app: react-frontend
+    spec:
+      containers:
+        - name: react-frontend
+          image: walidzaroui/react-frontend:v1
+          ports:
+            - containerPort: 5173
+          env:
+            - name: VITE_API_URL  # Example environment variable if needed
+              value: http://localhost:8000  # Replace with your backend service URL

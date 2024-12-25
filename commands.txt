@@ -1,0 +1,46 @@
+
+kubectl apply -f backend-dep.yaml
+kubectl apply -f backend-persistent.yaml
+kubectl apply -f backend-service.yaml
+kubectl apply -f configmap.yaml
+kubectl apply -f postgres-deployment.yaml
+kubectl apply -f secret.yaml  
+---------------------------------------
+kubectl replace -f backend-dep.yaml
+kubectl replace -f backend-persistent.yaml
+kubectl replace -f backend-service.yaml
+kubectl replace -f configmap.yaml
+kubectl replace -f postgres-deployment.yaml
+kubectl replace -f secret.yaml
+---------------------------------------
+kubectl delete deployment postgres 
+kubectl delete service postgres-service   
+---------------------------------------
+kubectl delete pods --all
+kubectl delete deployments --all
+kubectl delete services --all
+kubectl delete secrets --all
+kubectl delete pvc --all
+kubectl delete configmaps --all
+---------------------------------------
+kubectl apply -f react-frontend-deployment.yaml
+kubectl apply -f react-frontend-service.yaml
+
+---------------------------------------
+minikube service django-backend-service --url
+
+
+#push to docker hub
+docker build -t walidzaroui/django-backend:v1 .
+docker tag walidzaroui/django-backend:v1 walidzaroui/django-backend:v1
+docker push walidzaroui/django-backend:v1
+
+
+
+
+
+
+
+
+---------------------------------------
+kubectl port-forward svc/django-backend-service 8000:80
